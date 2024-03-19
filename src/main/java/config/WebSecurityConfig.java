@@ -1,4 +1,4 @@
-//package config;
+package config;
 //
 //import org.springframework.context.annotation.Bean;
 //import org.springframework.context.annotation.Configuration;
@@ -42,3 +42,22 @@
 //        return new InMemoryUserDetailsManager(user);
 //    }
 //}
+
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
+        return security
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .formLogin(login -> login.defaultSuccessUrl("/", true).permitAll())
+                .build();
+    }
+}

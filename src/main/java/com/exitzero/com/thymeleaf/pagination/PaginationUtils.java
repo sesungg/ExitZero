@@ -15,7 +15,7 @@ import com.exitzero.com.ComDefaultVO;
  */
 public class PaginationUtils {
 
-    public static <T extends ComDefaultVO> PaginationInfo buildPagination(T searchVO, Integer totalCount){
+    public static <T extends PaginationVO> PaginationInfo buildPagination(T searchVO, Integer totalCount){
 
         if(searchVO == null || totalCount == null) return null;
 
@@ -28,10 +28,7 @@ public class PaginationUtils {
 
             return paginationInfo;
 
-        }catch (RuntimeException e){
-            return null;
-        }
-        catch (Exception e){
+        } catch (Exception e){
             return null;
         }
 

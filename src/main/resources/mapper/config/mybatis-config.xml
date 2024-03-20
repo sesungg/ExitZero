@@ -14,6 +14,7 @@
     </settings>
     <typeAliases>
         <typeAlias  alias="ArticleVO" type="com.exitzero.user.article.domain.ArticleVO"/>
+        <typeAlias  alias="ArticleCommentVO" type="com.exitzero.user.article.domain.ArticleCommentVO"/>
     </typeAliases>
 
 </configuration>

@@ -5,5 +5,6 @@ import lombok.Data;
 
 @Data
 public class ArticleSearchVO extends ComDefaultVO {
+    private Long articleId;
     private String category;
 }

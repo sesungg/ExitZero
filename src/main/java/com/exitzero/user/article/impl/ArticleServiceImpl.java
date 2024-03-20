@@ -1,5 +1,6 @@
 package com.exitzero.user.article.impl;
 
+import com.exitzero.user.article.domain.ArticleCommentVO;
 import com.exitzero.user.article.mapper.ArticleMapper;
 import com.exitzero.user.article.ArticleService;
 import com.exitzero.user.article.domain.ArticleVO;
@@ -23,5 +24,15 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleVO> articlesByCategory(ArticleSearchVO searchVO) {
         return mapper.articlesByCategory(searchVO);
+    }
+
+    @Override
+    public ArticleVO articleById(ArticleSearchVO searchVO) {
+        return mapper.articleById(searchVO);
+    }
+
+    @Override
+    public List<ArticleCommentVO> commentByArticleId(ArticleSearchVO searchVO) {
+        return mapper.commentByArticleId(searchVO);
     }
 }

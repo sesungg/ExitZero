@@ -3,6 +3,7 @@ package com.exitzero.user.article.domain;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ArticleVO {
@@ -14,6 +15,8 @@ public class ArticleVO {
     private String createdBy;
     private LocalDateTime modifiedAt;
     private String modifiedBy;
+
+    private List<ArticleCommentVO> articleCommentList;
 
     public ArticleVO(String title, String content, String category) {
         this.title = title;

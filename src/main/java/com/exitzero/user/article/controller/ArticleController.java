@@ -3,6 +3,7 @@ package com.exitzero.user.article.controller;
 import com.exitzero.com.thymeleaf.pagination.PaginationInfo;
 import com.exitzero.com.thymeleaf.pagination.PaginationUtils;
 import com.exitzero.user.article.ArticleService;
+import com.exitzero.user.article.domain.ArticleCommentVO;
 import com.exitzero.user.article.domain.ArticleVO;
 import com.exitzero.user.article.search.ArticleSearchVO;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @GetMapping("/line/{category}")
-    public String categoryArticle(@PathVariable("category") String category, @ModelAttribute("searchVO") ArticleSearchVO searchVO, Model model) {
+    public String articlesByCategory(@PathVariable("category") String category, @ModelAttribute("searchVO") ArticleSearchVO searchVO, Model model) {
         searchVO.setCategory(category);
 
         int articlesCnt = articleService.articleListByCategory(category);
@@ -33,5 +34,23 @@ public class ArticleController {
         model.addAttribute("articles", articles);
         model.addAttribute("paginationInfo", paginationInfo);
         return "article/articles";
+    }
+
+    @GetMapping("/line/{category}/{articleId}")
+    public String article(
+            @PathVariable("category") String category,
+            @PathVariable("articleId") Long articleId,
+            @ModelAttribute("searchVO") ArticleSearchVO searchVO, Model model) {
+        searchVO.setCategory(category);
+        searchVO.setArticleId(articleId);
+
+        ArticleVO articleVO = articleService.articleById(searchVO);
+        List<ArticleCommentVO> commentVO = articleService.commentByArticleId(searchVO);
+
+        model.addAttribute("articleVO", articleVO);
+        model.addAttribute("commentVO", commentVO);
+
+        return "article/article";
+
     }
 }

@@ -19,4 +19,30 @@
         where category = #{category}
         limit #{recordCountPerPage} offset #{firstIndex}
     </select>
+
+    <select id="articleById" resultType="ArticleVO">
+        select
+            article_id
+            , title
+            , content
+            , category
+            , created_at
+            , created_by
+            , modified_at
+            , modified_by
+        from article
+        where article_id = #{articleId}
+    </select>
+
+    <select id="commentByArticleId" resultType="ArticleCommentVO">
+        select
+            article_comment_id
+            , content
+            , created_at
+            , created_by
+            , modified_at
+            , modified_by
+        from article_comment
+        where article_id = #{articleId}
+    </select>
 </mapper>

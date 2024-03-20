@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.exitzero.user.article.mapper.ArticleMapper">
+    <select id="articleListByCategory" resultType="int">
+        select count(article_id)
+        from article
+        where category = #{category}
+    </select>
+
+    <select id="articlesByCategory" resultType="ArticleVO">
+        select
+            article_id
+            , title
+            , content
+            , category
+            , created_at
+            , created_by
+        from article
+        where category = #{category}
+        limit #{recordCountPerPage} offset #{firstIndex}
+    </select>
+</mapper>

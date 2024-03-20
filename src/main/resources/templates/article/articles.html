@@ -7,24 +7,38 @@
     <link href="/webjars/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<script>
+function fnLinkPage(pageIndex) {
+    document.searchVO.page.value = pageIndex
+    document.searchVO.submit();
+}
+</script>
 <div class="container">
     <h2>게시글 목록</h2>
+    <form name="searchVO" method="get" th:object="${searchVO}">
+        <input type="hidden" th:field="*{page}">
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
             <th>제목</th>
             <th>내용</th>
             <th>카테고리</th>
+            <th>작성자</th>
+            <th>작성일시</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="post : ${posts}">
-            <td th:text="${post.title}">제목</td>
-            <td th:text="${post.content}">내용</td>
-            <td th:text="${post.category}">카테고리</td>
+        <tr th:each="article : ${articles}">
+            <td th:text="${article.title}">제목</td>
+            <td th:text="${article.content}">내용</td>
+            <td th:text="${article.category}">카테고리</td>
+            <td th:text="${article.createdBy}">작성자</td>
+            <td th:text="${article.createdAt}">작성일시</td>
         </tr>
         </tbody>
     </table>
+    <div th:pagination="${paginationInfo}"></div>
 </div>
 <script src="/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
